@@ -3,12 +3,17 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/product.css";
+import swal from "sweetalert";
 import SearchInput from "../../components/Form/SearchInput";
 import AdminSearchInput from "../../components/Form/AdminSearchInput";
+import {getConfig,axiosInstance} from '../../utils/request.js'
+
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [id, setId] = useState("");
+  const navigate = useNavigate()
 
   //get all products
   const getAllProducts = async () => {
