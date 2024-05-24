@@ -1,0 +1,101 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.con {
+  margin-left: 18%;
+}
+
+.col-lg-6 {
+  /* flex: 0 0 calc(50% - 5px); */
+  flex: 0 1 auto; /* Allow the element to grow and shrink based on content */
+  max-height: 200px;
+  margin-bottom: 10px;
+}
+.col-md-5 {
+  margin-bottom: 10px; /* Adjust margin bottom to reduce the gap */
+}
+.content-info {
+  text-align: justify;
+  color: black;
+}
+
+.carousel-container-arrow {
+  width: 128%;
+  height: 72%;
+  margin-left: -58px;
+}
+
+.carousel {
+  overflow: hidden;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+}
+
+.carousel-item .carouse-img-arrow {
+  width: 50%;
+  height: 81%;
+}
+.intro-excerpt-activity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  margin-right: 50%;
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Segoe UI Regular"),
+    url("../../public/fonts/Segoe\ UI.woff") format("woff");
+  margin-top: 72px;
+}
+.card-activity {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-text-arrow {
+  color: #333;
+  margin-bottom: 0.5rem;
+  text-align: justify;
+  margin-right: 20px;
+  font-size: 30px;
+}
+.content {
+  text-align: justify;
+}
+.carousel-img-arrow {
+  height: 200px;
+  width: 200px;
+}
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .col-lg-6 {
+    flex: 1;
+    margin-bottom: 0px;
+  }
+
+  .carousel-container-arrow {
+    width: 91%;
+    height: 72%;
+    margin-left: 16px;
+    margin-top: 120%;
+  }
+
+  .carousel-item .carouse-img-arrow {
+    width: 98%;
+    height: 69%;
+  }
+}
