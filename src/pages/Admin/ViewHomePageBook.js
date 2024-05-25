@@ -32,7 +32,7 @@ const ViewHomePageBook = () => {
       );
       if (data?.success) {
         swal("SuccessFull", "Book Photo deleted successfully", "success");
-        navigate("/");
+        // navigate("/");
       }
     } catch (error) {
       toast.error("Something went wrong", error);
