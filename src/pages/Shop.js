@@ -5,7 +5,7 @@ import "../styles/button.css";
 import "../styles/style.css";
 import "../styles/hero.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { Prices } from "../components/Prices";
 import { useAuth } from "../context/Auth";
@@ -403,52 +403,60 @@ const Shop = () => {
                   key={product._id}
                   style={{ marginBottom: "3rem" }}
                 >
-                  <div className="card-8 ms-2 mb-2">
-                    <div>
-                      {isNewProduct(product) && (
-                        <span className="new-badge-shop">
-                          <strong className="new">New</strong>
-                        </span>
+                  <Link to={`/product/${product.slug}`}>
+                    <div className="card-8 ms-2 mb-2">
+                      <div>
+                        {isNewProduct(product) && (
+                          <span className="new-badge-shop">
+                            <strong className="new">New</strong>
+                          </span>
+                        )}
+                      </div>
+                      <div className="title-img">
+                        <img
+                          src={`/api/v1/product/product-photo/${product._id}`}
+                          className="card-img-top-product"
+                          alt={product.name}
+                          style={{ width: "190px", minheight: "auto" }}
+                        />
+                        {viewMode === "title" && <p>{product.name}</p>}
+                      </div>
+
+                      {viewMode !== "title" && (
+                        <div className="card-body">
+                          <div className="card-name-price">
+                            <h5 className="card-title-product">
+                              {product.name}
+                            </h5>
+                            <h5 className="card-desc">
+                              {product.description.substring(0, 20)}...
+                            </h5>
+                            <h6 className="card-price">
+                              Price: {product.price}
+                            </h6>
+                          </div>
+                          <div className="card-name-price">
+                            <button
+                              className="more-details ms-1"
+                              onClick={() =>
+                                navigate(`/product/${product.slug}`)
+                              }
+                            >
+                              More Details
+                            </button>
+                            <button
+                              className="add-cart-butn ms-1 mb-4"
+                              onClick={() => {
+                                addItemCart(product);
+                              }}
+                            >
+                              ADD TO CART
+                            </button>
+                          </div>
+                        </div>
                       )}
                     </div>
-                    <div className="title-img">
-                      <img
-                        src={`/api/v1/product/product-photo/${product._id}`}
-                        className="card-img-top-product"
-                        alt={product.name}
-                        style={{ width: "190px", minheight: "auto" }}
-                      />
-                      {viewMode === "title" && <p>{product.name}</p>}
-                    </div>
-
-                    {viewMode !== "title" && (
-                      <div className="card-body">
-                        <div className="card-name-price">
-                          <h5 className="card-title-product">{product.name}</h5>
-                          <h5 className="card-desc">
-                            {product.description.substring(0, 20)}...
-                          </h5>
-                          <h6 className="card-price">Price: {product.price}</h6>
-                        </div>
-                        <div className="card-name-price">
-                          <button
-                            className="more-details ms-1"
-                            onClick={() => navigate(`/product/${product.slug}`)}
-                          >
-                            More Details
-                          </button>
-                          <button
-                            className="add-cart-butn ms-1 mb-4"
-                            onClick={() => {
-                              addItemCart(product);
-                            }}
-                          >
-                            ADD TO CART
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                  </Link>
                 </div>
               ))}
             </div>
