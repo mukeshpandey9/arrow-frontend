@@ -138,6 +138,7 @@ const Shop = () => {
 
   //view list click
   const handleViewListClick = () => {
+    console.log("viewListClick: ", viewMode);
     setViewMode("list");
   };
 
@@ -380,8 +381,16 @@ const Shop = () => {
           </div>
         </div> */}
         <div className="">
-          <div className="col-md-10 product-shop">
-            <div className="row row-cols-1 row-cols-md-3">
+          <div
+            className={`${
+              viewMode === "list" ? "col-12" : "col-md-10 "
+            } product-shop`}
+          >
+            <div
+              className={`row ${
+                viewMode === "list" ? "" : "row-cols-1 row-cols-md-3"
+              }`}
+            >
               {products?.map((product, index) => (
                 <div className="col mb-4" key={product._id}>
                   <div className="card-8 ms-2 mb-2">
@@ -396,7 +405,7 @@ const Shop = () => {
                       src={`/api/v1/product/product-photo/${product._id}`}
                       className="card-img-top-product"
                       alt={product.name}
-                      style={{ width: "170px", height: "auto" }}
+                      style={{ minWidth: "170px", height: "auto"}}
                     />
                     <div className="card-body">
                       <div className="card-name-price">
@@ -436,7 +445,7 @@ const Shop = () => {
             </div>
           </div>
         </div>
-{/* 
+        {/* 
         <div>
           <nav aria-label="Page navigation example">
             <ul className="pagination page">
