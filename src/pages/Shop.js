@@ -138,7 +138,6 @@ const Shop = () => {
 
   //view list click
   const handleViewListClick = () => {
-    console.log("viewListClick: ", viewMode);
     setViewMode("list");
   };
 
@@ -218,20 +217,10 @@ const Shop = () => {
           </div>
         </div>
         <div className="col-md-5 d-flex justify-content-center align-items-center">
-          <div
-            className={`view-list p-2 ${
-              viewMode === "list" ? "bg-warning" : "bg-light"
-            }`}
-            onClick={handleViewListClick}
-          >
+          <div className="view-list" onClick={handleViewListClick}>
             <TfiViewListAlt />
           </div>
-          <div
-            className={`ms-4 view-title  ${
-              viewMode === "title" ? "bg-warning" : "bg-light"
-            }`}
-            onClick={handleViewTitleClick}
-          >
+          <div className="ms-4 view-title" onClick={handleViewTitleClick}>
             <MdOutlineCalendarViewMonth />
           </div>
           {/* {JSON.stringify(selectRadio, null, 4)} */}
@@ -391,16 +380,8 @@ const Shop = () => {
           </div>
         </div> */}
         <div className="">
-          <div
-            className={`${
-              viewMode === "list" ? "col-12" : "col-md-10 "
-            } product-shop`}
-          >
-            <div
-              className={`row ${
-                viewMode === "list" ? "" : "row-cols-1 row-cols-md-3"
-              }`}
-            >
+          <div className="col-md-10 product-shop">
+            <div className="row row-cols-1 row-cols-md-3">
               {products?.map((product, index) => (
                 <div className="col mb-4" key={product._id}>
                   <div className="card-8 ms-2 mb-2">
@@ -415,7 +396,7 @@ const Shop = () => {
                       src={`/api/v1/product/product-photo/${product._id}`}
                       className="card-img-top-product"
                       alt={product.name}
-                      style={{ minWidth: "120px" }}
+                      style={{ width: "170px", height: "auto" }}
                     />
                     <div className="card-body">
                       <div className="card-name-price">
