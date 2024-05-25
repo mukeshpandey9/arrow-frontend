@@ -50,6 +50,7 @@ import HomePageBookPost from "./pages/Admin/HomePageBookPost";
 import ViewHomePageBook from "./pages/Admin/ViewHomePageBook";
 import CreateDealerState from "./pages/Admin/CreateDealerState";
 import ViewDealerNetwork from "./pages/ViewDealerNetwork";
+import SearchAdmin from "./pages/Admin/SearchAdmin";
 // import OwnerRoute from "./components/Routes/OwnerRoutes";
 // import OwnerDashboard from "./pages/Owners/OwnerDashboard";
 
@@ -62,6 +63,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/admin-search" element={<SearchAdmin/>}/>
         <Route path="/cart" element={<CartPage />} />
         <Route path="/textbook-gallery" element={<TextBookGallery />} />
 
