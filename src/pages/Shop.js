@@ -436,37 +436,37 @@ const Shop = () => {
             </div>
           </div>
         </div>
-
-        // <div>
-        //   <nav aria-label="Page navigation example">
-        //     <ul className="pagination page">
-        //       <li
-        //         className="page-item"
-        //         onClick={(e) => setCurrentPage(currentPage - 1)}
-        //       >
-        //         <a
-        //           className="page-link"
-        //           href="javascript:void(0)"
-        //           disabled={currentPage == 1 ? true : false}
-        //         >
-        //           Previous
-        //         </a>
-        //       </li>
-        //       {renderPage().map((x) => (
-        //         <li className="page-item" key={x}>
-        //           <a
-        //             className="page-link"
-        //             href="javascript:void(0)"
-        //             onClick={(e) => handlePageClick(e, x)}
-        //           >
-        //             {x}
-        //           </a>
-        //         </li>
-        //       ))}
-          
-        //     </ul>
-        //   </nav>
-        // </div>
+{/* 
+        <div>
+          <nav aria-label="Page navigation example">
+            <ul className="pagination page">
+              <li
+                className="page-item"
+                onClick={(e) => setCurrentPage(currentPage - 1)}
+              >
+                <a
+                  className="page-link"
+                  href="javascript:void(0)"
+                  disabled={currentPage == 1 ? true : false}
+                >
+                  Previous
+                </a>
+              </li>
+              {renderPage().map((x) => (
+                <li className="page-item" key={x}>
+                  <a
+                    className="page-link"
+                    href="javascript:void(0)"
+                    onClick={(e) => handlePageClick(e, x)}
+                  >
+                    {x}
+                  </a>
+                </li>
+              ))}
+            
+            </ul>
+          </nav>
+        </div> */}
       </div>
       <hr className="ash-line" />
     </Layout>
