@@ -9,7 +9,7 @@ import { axiosInstance, getConfig } from "../../utils/request";
 const UpdateBanner = () => {
   const [photo, setPhoto] = useState("");
   const [secondphoto, setSecondPhoto] = useState("");
-  const [thirdPhoto, setThirdPhoto] = useState("");
+  const [thirdphoto, setThirdPhoto] = useState("");
 
   const getSingleBanner = async () => {
     try {
@@ -33,7 +33,7 @@ const UpdateBanner = () => {
       const bannerImage = new FormData();
       photo && bannerImage.append("photo", photo);
       secondphoto && bannerImage.append("secondphoto", secondphoto);
-      thirdPhoto && bannerImage.append("thirdPhoto", thirdPhoto);
+      thirdphoto && bannerImage.append("thirdphoto", thirdphoto); 
 
       await getConfig();
       const { data } = await axiosInstance.put(
@@ -126,10 +126,10 @@ const UpdateBanner = () => {
             </div>
             <div className="mb-3">
               <label className="Butn col-md-12">
-                {thirdPhoto ? thirdPhoto.name : "Upload Third Banner 🡇"}
+              {thirdphoto ? thirdphoto.name : "Upload Third Banner 🡇"}
                 <input
                   type="file"
-                  name="photo"
+                  name="thirdphoto"
                   accept="image/*"
                   onChange={(e) => setThirdPhoto(e.target.files[0])}
                   hidden
@@ -137,10 +137,10 @@ const UpdateBanner = () => {
               </label>
             </div>
             <div className="mb-3">
-              {thirdPhoto ? (
+              {thirdphoto ? (
                 <div className="text-center">
                   <img
-                    src={URL.createObjectURL(thirdPhoto)}
+                    src={URL.createObjectURL(thirdphoto)}
                     alt="product_photo"
                     height={"200px"}
                     className="img img-responsive"
