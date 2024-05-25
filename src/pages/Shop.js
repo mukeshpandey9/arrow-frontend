@@ -218,10 +218,20 @@ const Shop = () => {
           </div>
         </div>
         <div className="col-md-5 d-flex justify-content-center align-items-center">
-          <div className="view-list" onClick={handleViewListClick}>
+          <div
+            className={`view-list p-2 ${
+              viewMode === "list" ? "bg-warning" : "bg-light"
+            }`}
+            onClick={handleViewListClick}
+          >
             <TfiViewListAlt />
           </div>
-          <div className="ms-4 view-title" onClick={handleViewTitleClick}>
+          <div
+            className={`ms-4 view-title  ${
+              viewMode === "title" ? "bg-warning" : "bg-light"
+            }`}
+            onClick={handleViewTitleClick}
+          >
             <MdOutlineCalendarViewMonth />
           </div>
           {/* {JSON.stringify(selectRadio, null, 4)} */}
@@ -405,7 +415,7 @@ const Shop = () => {
                       src={`/api/v1/product/product-photo/${product._id}`}
                       className="card-img-top-product"
                       alt={product.name}
-                      style={{ minWidth: "170px", height: "auto"}}
+                      style={{ minWidth: "120px" }}
                     />
                     <div className="card-body">
                       <div className="card-name-price">
