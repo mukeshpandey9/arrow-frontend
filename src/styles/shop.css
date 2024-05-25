@@ -4,7 +4,10 @@
   align-items: center;
 }
 .new-badge-shop {
-  transform: translate(-38%, 4px);
+  position: absolute;
+  top: 0;
+  left: 0px;
+  z-index: 100;
   border-radius: 999px;
   background-color: #dc3545;
   padding: 0.25rem 0.5rem;
@@ -34,7 +37,8 @@
   font-weight: bold;
 }
 .card-8 {
-  width: 95%; /* Set the width to 100% to occupy available space */
+  position: relative;
+  width: fit-content; /* Set the width to 100% to occupy available space */
   margin-bottom: 40px;
   border: 3px solid white;
   display: flex;
@@ -43,6 +47,14 @@
   transition: all 0.5s ease;
 
   /* border: 1px solid black; */
+}
+.title-img {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-img p {
+  max-width: 170px;
 }
 .card-view-title {
   width: 95%; /* Set the width to 100% to occupy available space */
@@ -55,7 +67,7 @@
   /* border: 1px solid black; */
 }
 .card-view-title:hover {
-  transform: scale(0.9);
+  transform: scale(0.96);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -64,7 +76,7 @@
 }
 
 .card-8:hover {
-  transform: scale(0.9);
+  transform: scale(0.96);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -169,10 +181,7 @@
   margin-top: 75px;
 }
 .product-shop {
-  margin-left: 130px;
-  display: flex; /* Ensure the container is flex */
-  flex-wrap: nowrap; /* Ensure flex items don't wrap to the next line */
-  overflow-x: auto; /* Enable horizontal scrolling if necessary */
+  padding: 0 80px;
 }
 .card-img-top-product {
   /* border-top-left-radius: 8px;
@@ -314,10 +323,7 @@
     cursor: pointer;
   }
   .product-shop {
-    margin-left: 14px;
-    display: flex; /* Ensure the container is flex */
-    flex-wrap: nowrap; /* Ensure flex items don't wrap to the next line */
-    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+    padding: 0 1rem;
   }
   .card-8 {
     width: 97%; /* Set the width to 100% to occupy available space */
@@ -397,10 +403,7 @@
     cursor: pointer;
   }
   .product-shop {
-    margin-left: 114px;
-    display: flex; /* Ensure the container is flex */
-    flex-wrap: nowrap; /* Ensure flex items don't wrap to the next line */
-    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+    padding: 0 50px;
   }
   .card-8 {
     width: 87%; /* Set the width to 100% to occupy available space */
