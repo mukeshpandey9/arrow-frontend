@@ -39,7 +39,7 @@ const AdminSearchInput = () => {
       );
       setValues({ ...values, result: data });
       setKeyword("");
-      navigate("/search");
+      navigate("/admin-search");
     } catch (error) {
       console.log(error);
     }
