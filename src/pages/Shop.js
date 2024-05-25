@@ -217,10 +217,20 @@ const Shop = () => {
           </div>
         </div>
         <div className="col-md-5 d-flex justify-content-center align-items-center">
-          <div className="view-list" onClick={handleViewListClick}>
+          <div
+            className={`view-list p-2  ${
+              viewMode === "list" ? "bg-warning" : "bg-white"
+            }`}
+            onClick={handleViewListClick}
+          >
             <TfiViewListAlt />
           </div>
-          <div className="ms-4 view-title" onClick={handleViewTitleClick}>
+          <div
+            className={`ms-4 p-1 view-title  ${
+              viewMode === "title" ? "bg-warning" : "bg-white"
+            }`}
+            onClick={handleViewTitleClick}
+          >
             <MdOutlineCalendarViewMonth />
           </div>
           {/* {JSON.stringify(selectRadio, null, 4)} */}
@@ -380,10 +390,19 @@ const Shop = () => {
           </div>
         </div> */}
         <div className="">
-          <div className="col-md-10 product-shop">
-            <div className="row row-cols-1 row-cols-md-3">
+          <div className="col-md-12 product-shop">
+            <div
+              className={`row row-cols-1 row-cols-sm-2 row-cols-md-3 ${
+                viewMode !== "list" &&
+                "row-cols-sm-3 row-cols-md-3 row-cols-lg-4 "
+              } `}
+            >
               {products?.map((product, index) => (
-                <div className="col mb-4" key={product._id}>
+                <div
+                  className="col"
+                  key={product._id}
+                  style={{ marginBottom: "3rem" }}
+                >
                   <div className="card-8 ms-2 mb-2">
                     <div>
                       {isNewProduct(product) && (
@@ -392,37 +411,43 @@ const Shop = () => {
                         </span>
                       )}
                     </div>
-                    <img
-                      src={`/api/v1/product/product-photo/${product._id}`}
-                      className="card-img-top-product"
-                      alt={product.name}
-                      style={{ width: "170px", height: "auto" }}
-                    />
-                    <div className="card-body">
-                      <div className="card-name-price">
-                        <h5 className="card-title-product">{product.name}</h5>
-                        <h5 className="card-desc">
-                          {product.description.substring(0, 20)}...
-                        </h5>
-                        <h6 className="card-price">Price: {product.price}</h6>
-                      </div>
-                      <div className="card-name-price">
-                        <button
-                          className="more-details ms-1"
-                          onClick={() => navigate(`/product/${product.slug}`)}
-                        >
-                          More Details
-                        </button>
-                        <button
-                          className="add-cart-butn ms-1 mb-4"
-                          onClick={() => {
-                            addItemCart(product);
-                          }}
-                        >
-                          ADD TO CART
-                        </button>
-                      </div>
+                    <div className="title-img">
+                      <img
+                        src={`/api/v1/product/product-photo/${product._id}`}
+                        className="card-img-top-product"
+                        alt={product.name}
+                        style={{ width: "190px", minheight: "auto" }}
+                      />
+                      {viewMode === "title" && <p>{product.name}</p>}
                     </div>
+
+                    {viewMode !== "title" && (
+                      <div className="card-body">
+                        <div className="card-name-price">
+                          <h5 className="card-title-product">{product.name}</h5>
+                          <h5 className="card-desc">
+                            {product.description.substring(0, 20)}...
+                          </h5>
+                          <h6 className="card-price">Price: {product.price}</h6>
+                        </div>
+                        <div className="card-name-price">
+                          <button
+                            className="more-details ms-1"
+                            onClick={() => navigate(`/product/${product.slug}`)}
+                          >
+                            More Details
+                          </button>
+                          <button
+                            className="add-cart-butn ms-1 mb-4"
+                            onClick={() => {
+                              addItemCart(product);
+                            }}
+                          >
+                            ADD TO CART
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
