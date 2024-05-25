@@ -61,7 +61,7 @@ const Contact = () => {
         <div className="container">
           <div className="row justify-content-between">
             <div className="col-lg-5">
-              <div className="intro-excerpt-contact">
+              <div className="intro-excerpt">
                 <h1>
                   Contact
                   <span className="something ms-1">
