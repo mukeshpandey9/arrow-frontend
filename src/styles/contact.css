@@ -21,6 +21,18 @@
   color: white;
   width: 56%;
 }
+.executive-custom-selects select{
+  appearance: none; /* Hide default appearance */
+  padding: 10px; /* Adjust padding as needed */
+  border: 1px solid #e0731d; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #e0731d; /* Background color */
+  cursor: pointer; /* Show pointer cursor */
+  transition: border-color 0.3s ease; /* Add transition for hover effect */
+  color: white;
+  width: 15%;
+  margin: 12px;
+}
 .option {
   background-color: #ced4da;
 }
