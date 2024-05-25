@@ -21,7 +21,7 @@
   color: white;
   width: 56%;
 }
-.executive-custom-selects select{
+.executive-custom-selects select {
   appearance: none; /* Hide default appearance */
   padding: 10px; /* Adjust padding as needed */
   border: 1px solid #e0731d; /* Border color */
@@ -147,10 +147,11 @@
 }
 .intro-excerpt {
   display: flex;
-  justify-content: center;
-  align-items: center;
   color: white;
-  margin-top: 300px;
+}
+.intro-excerpt h1 {
+  font-weight: 700;
+  font-size: 3rem;
 }
 .something {
   color: #db7f1a;
