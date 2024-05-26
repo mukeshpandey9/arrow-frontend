@@ -29,23 +29,23 @@ const UpdateProduct = () => {
   const [subjects, setSubjects] = useState([]);
 
   //get single product
+  const slug = params.slug;
   const getSingleProduct = async () => {
     try {
-      const { data } = await axios.get(
-        `/api/v1/product/get-product/${params.slug}`
-      );
+      const { data } = await axios.get(`/api/v1/product/get-product/${slug}`);
       setName(data.product.name);
+      console.log(data?.product.subject._id);
       setId(data.product._id);
       setDescription(data.product.description);
       setAuthor(data.product.author);
       setPages(data.product.pages);
-      setSubject(data.product.subject);
+      setSubject(data.product.subject._id);
       setIsbn(data.product.isbn);
       setPrice(data.product.price);
       setPrice(data.product.price);
       setQuantity(data.product.quantity);
       setShipping(data.product.shipping);
-      setCategory(data.product.category.name);
+      setCategory(data.product.category._id);
       setSubjects(data.product.subject.name);
     } catch (error) {
       console.log(error);
@@ -81,8 +81,8 @@ const UpdateProduct = () => {
     }
   };
   useEffect(() => {
-    getAllCategory();
     getAllSubjects();
+    getAllCategory();
   }, []);
 
   //create product function
@@ -103,10 +103,11 @@ const UpdateProduct = () => {
       backphoto && productData.append("backphoto", backphoto);
       productData.append("category", category);
       await getConfig();
-      const { data } = axiosInstance.put(
+      const { data } = axios.put(
         `/api/v1/product/update-product/${id}`,
         productData
       );
+
       if (data?.success) {
         toast.error(data?.message);
       } else {
@@ -118,7 +119,6 @@ const UpdateProduct = () => {
       toast.error("something went wrong");
     }
   };
-
   //delete a product
   const handleDelete = async () => {
     try {
@@ -165,7 +165,7 @@ const UpdateProduct = () => {
                 placeholder="Select the category"
                 size="large"
                 showSearch
-                className="form-select  mb-3"
+                className="form-select mb-3"
                 onChange={(value) => {
                   setCategory(value);
                 }}
@@ -189,11 +189,13 @@ const UpdateProduct = () => {
                 }}
                 value={subject}
               >
-                {subjects?.map((s) => (
-                  <Option key={s._id} value={s._id}>
-                    {s.name}
-                  </Option>
-                ))}
+                {Array.isArray(subjects) &&
+                  subjects.length > 0 &&
+                  subjects.map((s) => (
+                    <Option key={s._id} value={s._id}>
+                      {s.name}
+                    </Option>
+                  ))}
               </Select>
               <div className="mb-3">
                 <label className="Butn col-md-12">
