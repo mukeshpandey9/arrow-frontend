@@ -95,7 +95,7 @@ const AdminMenu = () => {
                   <span className="hide-menu">Create Subject</span>
                 </NavLink>
               </li>
-              <li className="sidebar-item">
+              <li className="sidebar-item d-none">
                 <NavLink
                   className="sidebar-link"
                   to="/dashboard/admin/banner"
