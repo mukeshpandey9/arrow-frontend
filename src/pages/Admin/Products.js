@@ -8,12 +8,11 @@ import "../../styles/product.css";
 import swal from "sweetalert";
 import SearchInput from "../../components/Form/SearchInput";
 import AdminSearchInput from "../../components/Form/AdminSearchInput";
-import {getConfig,axiosInstance} from '../../utils/request.js'
+import { getConfig, axiosInstance } from "../../utils/request.js";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [id, setId] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //get all products
   const getAllProducts = async () => {
@@ -29,7 +28,7 @@ const Products = () => {
     getAllProducts();
   }, []);
   //delete a product
-  const handleDelete = async () => {
+  const handleDelete = async (pid) => {
     try {
       // Trigger SweetAlert confirmation dialog
       const willDelete = await swal({
@@ -42,10 +41,11 @@ const Products = () => {
 
       // If the user confirms deletion
       if (willDelete) {
-        await getConfig();
+        // await getConfig();
         const { data } = await axiosInstance.delete(
-          `/api/v1/product/delete-product/${id}`
+          `/api/v1/product/delete-product/${pid}`
         );
+        getAllProducts();
         navigate("/dashboard/admin/products");
       } else {
         // If the user cancels deletion
@@ -58,6 +58,7 @@ const Products = () => {
       // toast.error("Something went wrong");
     }
   };
+
   return (
     <Layout>
       <div>
@@ -98,7 +99,12 @@ const Products = () => {
                     <button className="Butn mb-4 ms-4"> Edit</button>
                   </Link>
 
-                  <button className="Butn ms-2" onClick={handleDelete}>
+                  <button
+                    className="Butn ms-2"
+                    onClick={ () => {
+                      handleDelete(p._id);
+                    }}
+                  >
                     Delete
                   </button>
                 </div>
