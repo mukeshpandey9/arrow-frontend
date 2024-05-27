@@ -34,19 +34,17 @@ const UpdateProduct = () => {
     try {
       const { data } = await axios.get(`/api/v1/product/get-product/${slug}`);
       setName(data.product.name);
-      console.log(data?.product.subject._id);
       setId(data.product._id);
       setDescription(data.product.description);
       setAuthor(data.product.author);
       setPages(data.product.pages);
-      setSubject(data.product.subject._id);
+      setSubject(data.product.subject.name);
       setIsbn(data.product.isbn);
       setPrice(data.product.price);
       setPrice(data.product.price);
       setQuantity(data.product.quantity);
       setShipping(data.product.shipping);
       setCategory(data.product.category._id);
-      setSubjects(data.product.subject.name);
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +71,7 @@ const UpdateProduct = () => {
     try {
       const { data } = await axios.get("/api/v1/subject/subjects");
       if (data?.success) {
-        setSubjects(data?.subject);
+        setSubjects(data.subject);
       }
     } catch (error) {
       console.log(error);
@@ -81,8 +79,8 @@ const UpdateProduct = () => {
     }
   };
   useEffect(() => {
-    getAllSubjects();
     getAllCategory();
+    getAllSubjects();
   }, []);
 
   //create product function
@@ -183,6 +181,7 @@ const UpdateProduct = () => {
                 placeholder="select subject"
                 size="large"
                 showSearch
+                defaultValue={subject?.name}
                 className="form-select  mb-3"
                 onChange={(value) => {
                   setSubject(value);
