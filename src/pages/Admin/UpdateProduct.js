@@ -43,7 +43,7 @@ const UpdateProduct = () => {
       setQuantity(data?.product.quantity);
       setShipping(data?.product.shipping);
       setCategory(data.product.category._id);
-      setSubject(data.product.subject.name);
+      setSubject(data.product.subject._id);
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +86,15 @@ const UpdateProduct = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
+      if (!subject) {
+        alert("Please select a subject");
+        return;
+      }
+
+      if (!category) {
+        alert("Please select a category");
+        return;
+      }
       const productData = new FormData();
       productData.append("name", name);
       productData.append("description", description);
