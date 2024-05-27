@@ -95,6 +95,10 @@ const UpdateProduct = () => {
         toast.error("Please select a category");
         return;
       }
+      if (!name || !description || !author || !isbn || !pages || !price) {
+        toast.error("Please fill all the fields");
+        return;
+      }
       const productData = new FormData();
       productData.append("name", name);
       productData.append("description", description);
