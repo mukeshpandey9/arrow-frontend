@@ -33,18 +33,17 @@ const UpdateProduct = () => {
   const getSingleProduct = async () => {
     try {
       const { data } = await axios.get(`/api/v1/product/get-product/${slug}`);
-      setName(data.product.name);
-      setId(data.product._id);
-      setDescription(data.product.description);
-      setAuthor(data.product.author);
-      setPages(data.product.pages);
-      setSubject(data.product.subject.name);
-      setIsbn(data.product.isbn);
-      setPrice(data.product.price);
-      setPrice(data.product.price);
-      setQuantity(data.product.quantity);
-      setShipping(data.product.shipping);
+      setName(data?.product.name);
+      setId(data?.product._id);
+      setDescription(data?.product.description);
+      setAuthor(data?.product.author);
+      setPages(data?.product.pages);
+      setIsbn(data?.product.isbn);
+      setPrice(data?.product.price);
+      setQuantity(data?.product.quantity);
+      setShipping(data?.product.shipping);
       setCategory(data.product.category._id);
+      setSubject(data.product.subject.name);
     } catch (error) {
       console.log(error);
     }
