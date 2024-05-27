@@ -86,13 +86,13 @@ const UpdateProduct = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      if (!subject) {
-        alert("Please select a subject");
+       if (!subject) {
+        toast.error("Please select a subject");
         return;
       }
 
       if (!category) {
-        alert("Please select a category");
+        toast.error("Please select a category");
         return;
       }
       const productData = new FormData();
