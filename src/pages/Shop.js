@@ -218,20 +218,30 @@ const Shop = () => {
         </div>
         <div className="col-md-5 d-flex justify-content-center align-items-center">
           <div
-            className={`view-list p-2  ${
-              viewMode === "list" ? "bg-warning" : "bg-white"
-            }`}
+            className={`view-list p-2 `}
+            style={{
+              backgroundColor: viewMode === "list" ? "#e0731d" : "transparent",
+            }}
             onClick={handleViewListClick}
           >
-            <TfiViewListAlt />
+            <TfiViewListAlt
+              style={{
+                color: viewMode === "list" ? "white" : "black",
+              }}
+            />
           </div>
           <div
-            className={`ms-4 p-1 view-title  ${
-              viewMode === "title" ? "bg-warning" : "bg-white"
-            }`}
+            className={`ms-4 p-1 view-title`}
             onClick={handleViewTitleClick}
+            style={{
+              backgroundColor: viewMode === "title" ? "#e0731d" : "transparent",
+            }}
           >
-            <MdOutlineCalendarViewMonth />
+            <MdOutlineCalendarViewMonth
+              style={{
+                color: viewMode === "title" ? "white" : "black",
+              }}
+            />
           </div>
           {/* {JSON.stringify(selectRadio, null, 4)} */}
           <div className="search-filter mr-3 custom-select">
