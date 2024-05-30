@@ -127,7 +127,7 @@ const WriteReview = () => {
               </div>
               <div className="col-md-9">
                 <div className="col-md-9">
-                  <h1 className="text-center">All Dealers</h1>
+                  <h1 className="text-center">All Reviews</h1>
                   <div className="border shadow">
                     <table className="table">
                       <thead>
