@@ -1,5 +1,9 @@
 .product-details-img {
   width: 63%;
+  height: fit-content;
+}
+.product-details {
+  margin: auto;
 }
 .carousel-product-details {
   width: 90%;
