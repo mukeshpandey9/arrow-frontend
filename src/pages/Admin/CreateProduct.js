@@ -280,7 +280,7 @@ const CreateProduct = () => {
               <div className="mb-3">
                 <Select
                   bordered={false}
-                  placeholder="Select Shipping "
+                  placeholder="Select Instock"
                   size="large"
                   showSearch
                   className="form-select mb-3"
