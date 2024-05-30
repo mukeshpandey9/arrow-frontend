@@ -94,7 +94,7 @@ const CreateDealerState = () => {
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <h1 className="">Dealer State Controller</h1>
+            <h1 className="">Executive State Controller</h1>
 
             <div className="p-3 w-50">
               <DealerStateForm
