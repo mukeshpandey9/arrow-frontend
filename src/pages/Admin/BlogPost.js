@@ -50,7 +50,7 @@ const BlogPost = () => {
               <AdminMenu />
             </div>
             <div className="col-md-9">
-              <h1>Post a News</h1>
+              <h1>Post an Activity</h1>
               <form onSubmit={handleCreate}>
                 <div className="mb-3">
                   <label className="Butn col-md-12">
