@@ -123,7 +123,7 @@ const ProductDetails = () => {
     <Layout>
       <div className="font">
         <div className="row container product-details mt-3">
-          <div className="col-md-6">
+          <div className="col-md-6 d-flex align-items-center justify-content-center">
             {isLoading && (
               <img
                 src={loadingImg}
