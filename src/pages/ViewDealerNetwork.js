@@ -63,13 +63,13 @@ const ViewDealerNetwork = () => {
                     style={{ textAlign: "center" }}
                     onChange={(e) => handleFilterSelect(e.target.value)}
                   >
-                    <option
-                      className="option"
-                      value={selectedState}
-                      selected={selectedState ? false : true}
-                    >
-                      Arrow Executives &#9660;
-                    </option>
+                     <option
+                className="option"
+                value={selectedState}
+                selected={selectedState ? false : true}
+              >
+                Select State &#9660;
+              </option>
 
                     {states?.map((s) => (
                       <option
