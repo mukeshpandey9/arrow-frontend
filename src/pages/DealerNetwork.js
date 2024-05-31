@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import "../styles/Dealernetwork.css";
-import { getConfig, axiosInstance } from "../utils/request";
+import { getConfig, API } from "../utils/request";
 
 const DealerNetwork = () => {
   const [dealerNetwork, setDealerNetwork] = useState([]);
@@ -10,7 +10,7 @@ const DealerNetwork = () => {
     const getDealers = async () => {
       try {
         await getConfig();
-        const res = await axiosInstance.get("/api/v1/dealer/get-all-dealer");
+        const res = await API.get("/api/v1/dealer/get-all-dealer");
         setDealerNetwork(res.data);
         console.log(res.data);
       } catch (error) {

@@ -1,5 +1,5 @@
 import { useState, useContext, createContext, useEffect } from "react";
-import axios from "axios";
+import { API } from "../utils/request";
 
 const CartContext = createContext();
 const CartProvider = ({ children }) => {
@@ -7,7 +7,7 @@ const CartProvider = ({ children }) => {
 
   const fetchCartProducts = async (userID) => {
     try {
-      const response = await axios.post("/api/v1/product/cart/get-item", {
+      const response = await API.post("/api/v1/product/cart/get-item", {
         userID: userID,
       });
       console.log(response.data.cart);

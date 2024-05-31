@@ -1,11 +1,11 @@
 import Layout from "../components/Layout/Layout";
 import React, { useState, useEffect } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { API } from "../utils/request";
 
 const ViewDealerNetwork = () => {
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [selectedState, setSelectedState] = useState("");
   const [dealerNetwork, setDealerNetwork] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,8 +19,8 @@ const ViewDealerNetwork = () => {
 
   const fetchDealerNetwork = async (state) => {
     try {
-      const response = await fetch(`/api/v1/dealer/selected-state/${state}`);
-      const data = await response.json();
+      const { data } = await API.get(`/api/v1/dealer/selected-state/${state}`);
+
       setDealerNetwork(data);
       setLoading(false);
     } catch (error) {
@@ -32,10 +32,9 @@ const ViewDealerNetwork = () => {
     setSelectedState(value);
   };
 
-
   const getAllStates = async () => {
     try {
-      const { data } = await axios.get("/api/v1/dealerstate/get-state");
+      const { data } = await API.get("/api/v1/dealerstate/get-state");
       if (data?.success) {
         setStates(data?.dealerState);
         console.log(data?.dealerState);
@@ -55,15 +54,14 @@ const ViewDealerNetwork = () => {
   return (
     <>
       <Layout>
-      <div className="">
-                
-                <div className="executive-search-filter executive-custom-selects">
-                  <select
-                    className="executive-class-filter"
-                    style={{ textAlign: "center" }}
-                    onChange={(e) => handleFilterSelect(e.target.value)}
-                  >
-                     <option
+        <div className="">
+          <div className="executive-search-filter executive-custom-selects">
+            <select
+              className="executive-class-filter"
+              style={{ textAlign: "center" }}
+              onChange={(e) => handleFilterSelect(e.target.value)}
+            >
+              <option
                 className="option"
                 value={selectedState}
                 selected={selectedState ? false : true}
@@ -71,18 +69,18 @@ const ViewDealerNetwork = () => {
                 Select State &#9660;
               </option>
 
-                    {states?.map((s) => (
-                      <option
-                        key={s._id}
-                        value={s._id}
-                        selected={selectedState == s._id ? true : false}
-                      >
-                        {s.state}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+              {states?.map((s) => (
+                <option
+                  key={s._id}
+                  value={s._id}
+                  selected={selectedState == s._id ? true : false}
+                >
+                  {s.state}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
         <h1 className="d-flex justify-content-center mt-4">Arrow Executives</h1>
         {loading ? (
           <p>Loading...</p>

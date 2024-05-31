@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
-import axios from "axios";
 import toast from "react-hot-toast";
 import swal from "sweetalert";
-import { getConfig, axiosInstance } from "../../utils/request";
+import { getConfig, API } from "../../utils/request";
 import { useNavigate, useParams } from "react-router-dom";
 
 const UpdatePosts = () => {
@@ -20,7 +19,7 @@ const UpdatePosts = () => {
   //get single posts
   const getSinglePost = async () => {
     try {
-      const { data } = await axios.get(
+      const { data } = await API.get(
         `/api/v1/posts/get-single-post/${params.slug}`
       );
       setTitle(data.post.title);
@@ -48,10 +47,7 @@ const UpdatePosts = () => {
       thirdphoto && postData.append("thirdPhoto", thirdphoto);
 
       await getConfig();
-      const { data } = axiosInstance.put(
-        `/api/v1/posts/update-post/${id}`,
-        postData
-      );
+      const { data } = API.put(`/api/v1/posts/update-post/${id}`, postData);
       if (data?.success) {
         toast.error(data?.message);
       } else {

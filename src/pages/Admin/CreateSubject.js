@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
 import SubjectForm from "../../components/Form/SubjectForm";
-import axios from "axios";
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 import { Modal } from "antd";
+import { API } from "../../utils/request";
 
 const CreateSubject = () => {
   const [name, setName] = useState("");
@@ -16,7 +16,7 @@ const CreateSubject = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/subject/create-subject", {
+      const { data } = await API.post("/api/v1/subject/create-subject", {
         name,
       });
       if (data?.success) {
@@ -34,7 +34,7 @@ const CreateSubject = () => {
   //get all subjects
   const getAllSubjects = async () => {
     try {
-      const { data } = await axios.get("/api/v1/subject/subjects");
+      const { data } = await API.get("/api/v1/subject/subjects");
       if (data?.success) {
         setSubjects(data?.subject);
       }
@@ -52,7 +52,7 @@ const CreateSubject = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(
+      const { data } = await API.put(
         `/api/v1/subject/update-subject/${selected._id}`,
         { name: updateName }
       );
@@ -73,7 +73,7 @@ const CreateSubject = () => {
   //delete subject
   const handleDelete = async (pId) => {
     try {
-      const { data } = await axios.delete(
+      const { data } = await API.delete(
         `/api/v1/subject/delete-subject/${pId}`
       );
       if (data.success) {

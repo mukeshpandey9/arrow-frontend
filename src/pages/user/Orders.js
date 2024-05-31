@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
 import UserMenu from "../../components/Layout/UserMenu";
-import axios from "axios";
 import { useAuth } from "../../context/Auth";
 import { useNavigate } from "react-router-dom";
+import { API } from "../../utils/request";
 const Orders = () => {
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
@@ -12,7 +12,7 @@ const Orders = () => {
   const getOrders = async () => {
     try {
       console.log(auth.user.userID);
-      const res = await axios.get(
+      const res = await API.get(
         "/api/v1/order/get-user-order/" + auth?.user.userID,
         {
           userID: auth?.user.userID,
@@ -42,7 +42,7 @@ const Orders = () => {
   };
   const cancelOrder = async (id) => {
     try {
-      const res = await await axios.put(`/api/v1/order/cancel/${id}`);
+      const res = await await API.put(`/api/v1/order/cancel/${id}`);
       const updatedOrders = orders.map((order) =>
         order._id === id ? res.data.updatedOrders : order
       );

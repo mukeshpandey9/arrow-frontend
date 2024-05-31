@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import swal from "sweetalert";
 import { useCart } from "../context/cart";
@@ -9,7 +8,7 @@ import "../styles/productdetails.css";
 import { useNavigate } from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
 import loadingImg from "../images/loading.gif";
-import { getConfig, axiosInstance } from "../utils/request.js";
+import { getConfig, API } from "../utils/request.js";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -33,7 +32,7 @@ const ProductDetails = () => {
     try {
       setIsLoading(true);
       await getConfig();
-      const { data } = await axiosInstance.get(
+      const { data } = await API.get(
         `/api/v1/product/get-product/${params.slug}`
       );
       setProduct(data?.product);
@@ -53,14 +52,14 @@ const ProductDetails = () => {
     const image = [];
 
     try {
-      const { data: image1 } = await axios.get(
+      const { data: image1 } = await API.get(
         `/api/v1/product/product-photo/${id}`
       );
       if (image1) {
         image.push(`/api/v1/product/product-photo/${id}`);
       }
       try {
-        const { data: image2 } = await axios.get(
+        const { data: image2 } = await API.get(
           `/api/v1/product/product-frontphoto/${id}`
         );
         if (image2) {
@@ -70,7 +69,7 @@ const ProductDetails = () => {
         console.log(error);
       }
       try {
-        const { data: image3 } = await axios.get(
+        const { data: image3 } = await API.get(
           `/api/v1/product/product-backphoto/${id}`
         );
         if (image3) {
@@ -89,7 +88,7 @@ const ProductDetails = () => {
   //get similar product
   const getSimilarProduct = async (pid, cid) => {
     try {
-      const { data } = await axios.get(
+      const { data } = await API.get(
         `/api/v1/product/related-product/${pid}/${cid}`
       );
       setRelatedProducts(data?.products);
@@ -101,7 +100,7 @@ const ProductDetails = () => {
   const addItemCart = async (product) => {
     try {
       // Make POST request to add item to cart
-      const { data } = await axios.post("/api/v1/product/cart/add-item", {
+      const { data } = await API.post("/api/v1/product/cart/add-item", {
         userID: auth?.user.userID,
         productID: product._id,
         role: auth?.user?.role,

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import axios from "axios";
 import Layout from "../../components/Layout/Layout";
 import { Modal } from "antd";
 import AdminMenu from "../../components/Layout/AdminMenu";
@@ -7,7 +6,7 @@ import "../../styles/Viewdealer.css";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import swal from "sweetalert";
-import { getConfig, axiosInstance } from "../../utils/request";
+import { getConfig, API } from "../../utils/request";
 import DealerUpdateForm from "../../components/Form/DealerUpdateForm";
 const ViewDealers = () => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const ViewDealers = () => {
     const getAllDealers = async () => {
       try {
         await getConfig();
-        const res = await axiosInstance.get("/api/v1/dealer/get-all-dealer");
+        const res = await API.get("/api/v1/dealer/get-all-dealer");
         setGetDealerNetwork(res.data);
         console.log(res.data);
       } catch (error) {
@@ -34,9 +33,7 @@ const ViewDealers = () => {
   const handleDelete = async (pId) => {
     try {
       await getConfig();
-      const { data } = await axiosInstance.delete(
-        `/api/v1/dealer/delete-dealer/${pId}`
-      );
+      const { data } = await API.delete(`/api/v1/dealer/delete-dealer/${pId}`);
       if (data.success) {
         swal("SuccessFull", "Dealer deleted successfully", "success");
         // getAllDealers();
@@ -51,7 +48,7 @@ const ViewDealers = () => {
     e.preventDefault();
     try {
       await getConfig();
-      const { data } = await axiosInstance.put(
+      const { data } = await API.put(
         `/api/v1/dealer/update-dealer/${selectedDealer._id}`,
         updateDealer // Send the entire updateDealer object
       );

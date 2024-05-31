@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
 import swal from "sweetalert";
 import "../../styles/CSV.css";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import { getConfig, axiosInstance } from "../../utils/request.js";
+import { getConfig, API } from "../../utils/request.js";
 const UploadCSV = () => {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
@@ -18,7 +17,7 @@ const UploadCSV = () => {
       const formData = new FormData();
       formData.append("file", file);
       await getConfig();
-      await axiosInstance.post("/api/v1/product/upload", formData, {
+      await API.post("/api/v1/product/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -60,7 +59,7 @@ const UploadCSV = () => {
               </button>
               <div>
                 <a
-                 href="/excel_demo_uid2024.csv"
+                  href="/excel_demo_uid2024.csv"
                   className="download-link"
                   download
                 >

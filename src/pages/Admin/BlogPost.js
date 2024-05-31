@@ -1,10 +1,9 @@
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
 import { useState } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import swal from "sweetalert";
-import { axiosInstance, getConfig } from "../../utils/request";
+import { API, getConfig } from "../../utils/request";
 import { useNavigate } from "react-router-dom";
 
 const BlogPost = () => {
@@ -27,7 +26,7 @@ const BlogPost = () => {
       formData.append("secondphoto", secondphoto);
       formData.append("thirdphoto", thirdphoto);
 
-      const { data } = await axios.post("/api/v1/posts/upload-post", formData);
+      const { data } = await API.post("/api/v1/posts/upload-post", formData);
       if (data?.success) {
         toast.success(data?.message);
         navigate("/dashboard/admin/view_posts");

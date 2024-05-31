@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import { getConfig, axiosInstance } from "../../utils/request";
+import { getConfig, API } from "../../utils/request";
 import Layout from "../../components/Layout/Layout";
 import toast from "react-hot-toast";
 import swal from "sweetalert";
@@ -11,7 +11,7 @@ const UserDetails = () => {
     const getAllUsers = async () => {
       try {
         await getConfig();
-        const res = await axiosInstance.get("/api/v1/auth/get-user");
+        const res = await API.get("/api/v1/auth/get-user");
         setGetUser(res.data);
         console.log(res.data);
       } catch (error) {
@@ -38,9 +38,7 @@ const UserDetails = () => {
   const handleDelete = async (pId) => {
     try {
       await getConfig();
-      const { data } = await axiosInstance.delete(
-        `/api/v1/auth/delete-user/${pId}`
-      );
+      const { data } = await API.delete(`/api/v1/auth/delete-user/${pId}`);
       if (data.success) {
         swal("SuccessFull", "User Deleted Successfully!", "success");
         window.location.reload();

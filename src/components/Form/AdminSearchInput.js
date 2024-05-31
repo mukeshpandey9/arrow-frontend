@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSearch } from "../../context/search";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import "../../styles/Searchbar.css";
+import { API } from "../../utils/request";
 
 const AdminSearchInput = () => {
   const [values, setValues] = useSearch();
@@ -25,7 +25,7 @@ const AdminSearchInput = () => {
 
     try {
       // Fetch suggestions from the backend
-      const { data } = await axios.get(`/api/v1/product/search/${value}`);
+      const { data } = await API.get(`/api/v1/product/search/${value}`);
       setSuggestions(data); // Update suggestions based on user input
     } catch (error) {
       console.log(error);
@@ -34,7 +34,7 @@ const AdminSearchInput = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get(
+      const { data } = await API.get(
         `/api/v1/product/search/${values.keyword}`
       );
       setValues({ ...values, result: data });

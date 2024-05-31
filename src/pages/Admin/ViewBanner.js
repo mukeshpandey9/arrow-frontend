@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import "../../styles/banner.css";
-import { axiosInstance, getConfig } from "../../utils/request";
+import { API, getConfig } from "../../utils/request";
 import toast from "react-hot-toast";
 import swal from "sweetalert";
 
@@ -17,7 +16,7 @@ const ViewBanner = () => {
   };
   const getAllBanners = async () => {
     try {
-      const { data } = await axios.get("/api/v1/banner/get-banner");
+      const { data } = await API.get("/api/v1/banner/get-banner");
       setBanners(data.banner);
     } catch (error) {
       console.log(error);
@@ -31,9 +30,7 @@ const ViewBanner = () => {
   const handleDelete = async (pid) => {
     try {
       await getConfig();
-      const { data } = await axiosInstance.delete(
-        `/api/v1/banner/delete-banner/${pid}`
-      );
+      const { data } = await API.delete(`/api/v1/banner/delete-banner/${pid}`);
       if (data.success) {
         swal("SuccessFull", "banner deleted successfully", "success");
         navigate("/dashboard/admin/dashboard");

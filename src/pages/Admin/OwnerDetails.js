@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import { getConfig, axiosInstance } from "../../utils/request";
+import { getConfig, API } from "../../utils/request";
 import Layout from "../../components/Layout/Layout";
 import toast from "react-hot-toast";
 // import swal from "sweetalert";
@@ -20,7 +20,7 @@ const OwnerDetails = () => {
     const getAllOwners = async () => {
       try {
         await getConfig();
-        const res = await axiosInstance.get("/api/v1/auth/get-owners");
+        const res = await API.get("/api/v1/auth/get-owners");
         setGetOwner(res.data);
         console.log(res.data);
       } catch (error) {
@@ -47,7 +47,7 @@ const OwnerDetails = () => {
     e.preventDefault();
     try {
       await getConfig();
-      const { data } = await axiosInstance.put(
+      const { data } = await API.put(
         `/api/v1/auth/admin-profile-update/${selectedOwner._id}`,
         updateOwner
       );
@@ -66,9 +66,7 @@ const OwnerDetails = () => {
   const handleDelete = async (id) => {
     try {
       await getConfig();
-      const { data } = await axiosInstance.delete(
-        `/api/v1/auth/delete-owner/${id}`
-      );
+      const { data } = await API.delete(`/api/v1/auth/delete-owner/${id}`);
       if (data.success) {
         swal("SuccessFull", "Dealer deleted successful", "success");
         navigate("/dashboard/admin/dashboard");

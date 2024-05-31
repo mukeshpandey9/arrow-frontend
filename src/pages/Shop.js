@@ -4,7 +4,6 @@ import { useCart } from "../context/cart";
 import "../styles/button.css";
 import "../styles/style.css";
 import "../styles/hero.css";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { Prices } from "../components/Prices";
@@ -12,6 +11,7 @@ import { useAuth } from "../context/Auth";
 import "../styles/shop.css";
 import { TfiViewListAlt } from "react-icons/tfi";
 import { MdOutlineCalendarViewMonth } from "react-icons/md";
+import { API } from "../utils/request";
 
 const Shop = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const Shop = () => {
 
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/categories");
+      const { data } = await API.get("/api/v1/category/categories");
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -42,7 +42,7 @@ const Shop = () => {
   };
   const getAllSubjects = async () => {
     try {
-      const { data } = await axios.get("/api/v1/subject/subjects");
+      const { data } = await API.get("/api/v1/subject/subjects");
       if (data?.success) {
         setSubjects(data?.subject);
       }
@@ -66,7 +66,7 @@ const Shop = () => {
       if (pageNumber) {
         url += `?pageNumber=${pageNumber}&limit=${limit}`;
       }
-      const { data } = await axios.get(url);
+      const { data } = await API.get(url);
       setProducts(data.products);
       setCountTotal(data.countTotal);
     } catch (error) {
@@ -90,7 +90,7 @@ const Shop = () => {
 
   const filterProduct = async () => {
     try {
-      const { data } = await axios.post("/api/v1/product/product-filters", {
+      const { data } = await API.post("/api/v1/product/product-filters", {
         category: selectCategory,
         subject: selectSubject,
         radio: selectRadio,
@@ -102,7 +102,7 @@ const Shop = () => {
   };
   const getTotal = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/product-count");
+      const { data } = await API.get("/api/v1/product/product-count");
       setTotal(data?.total);
     } catch (error) {
       console.log(error);
@@ -118,7 +118,7 @@ const Shop = () => {
   const addItemCart = async (product) => {
     try {
       // Make POST request to add item to cart
-      const { data } = await axios.post("/api/v1/product/cart/add-item", {
+      const { data } = await API.post("/api/v1/product/cart/add-item", {
         userID: auth?.user.userID,
         productID: product._id,
         role: auth?.user?.role,
@@ -170,8 +170,6 @@ const Shop = () => {
     e.preventDefault(); // Prevent default behavior
     setCurrentPage(pageNumber);
   };
-
-  console.log(renderPage());
 
   const isNewProduct = (product) => {
     // Convert the creation date string to a Date object

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import axios from "axios";
 import { useAuth } from "../../context/Auth";
 import "../../styles/adminuserorder.css";
+import { API } from "../../utils/request";
 
 const Users = () => {
   const [orders, setOrders] = useState([]);
@@ -11,7 +11,7 @@ const Users = () => {
 
   const getOrders = async () => {
     try {
-      const res = await axios.get("/api/v1/order/get-all-order");
+      const res = await API.get("/api/v1/order/get-all-order");
       setOrders(res.data);
     } catch (error) {
       console.error("Error fetching orders:", error);
@@ -24,10 +24,9 @@ const Users = () => {
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
-      const response = await axios.put(
-        `/api/v1/order/update-order/${orderId}`,
-        { status: newStatus }
-      );
+      const response = await API.put(`/api/v1/order/update-order/${orderId}`, {
+        status: newStatus,
+      });
       const updatedOrder = response.data;
       // Update the local state with the updated order
       setOrders((prevOrders) =>

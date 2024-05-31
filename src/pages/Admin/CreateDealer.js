@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
-// import axios from "axios";
 import toast from "react-hot-toast";
-import { getConfig, axiosInstance } from "../../utils/request";
+import { getConfig, API } from "../../utils/request";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Select } from "antd";
 import swal from "sweetalert";
 const { Option } = Select;
@@ -58,10 +56,7 @@ const CreateDealer = () => {
       formData.append("email", email);
       formData.append("photo", photo);
 
-      const { data } = await axios.post(
-        "/api/v1/dealer/create-dealer",
-        formData
-      );
+      const { data } = await API.post("/api/v1/dealer/create-dealer", formData);
       if (data?.success) {
         toast.success(data?.message);
       } else {
@@ -106,7 +101,7 @@ const CreateDealer = () => {
 
   const getAllState = async () => {
     try {
-      const response = await axios.get("/api/v1/dealerstate/get-state");
+      const response = await API.get("/api/v1/dealerstate/get-state");
       const data = response.data;
       console.log("Response data:", data);
       if (data && data.success) {

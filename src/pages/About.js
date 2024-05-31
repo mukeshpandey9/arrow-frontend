@@ -8,7 +8,7 @@ import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import { Helmet } from "react-helmet";
 import arrowOwners from "../images/arrow-owners.png";
-import { getConfig, axiosInstance } from "../utils/request";
+import { getConfig, API } from "../utils/request";
 import { Carousel } from "react-bootstrap";
 const About = () => {
   const [getReviews, setGetReviews] = useState([]);
@@ -19,7 +19,7 @@ const About = () => {
     const getAllReview = async () => {
       try {
         await getConfig();
-        const res = await axiosInstance.get("/api/v1/review/get-all-review");
+        const res = await API.get("/api/v1/review/get-all-review");
         setGetReviews(res.data);
       } catch (error) {
         console.log("error Fetching all review");

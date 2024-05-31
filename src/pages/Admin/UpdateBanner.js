@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import { axiosInstance, getConfig } from "../../utils/request";
+import { API, getConfig } from "../../utils/request";
 
 const UpdateBanner = () => {
   const [photo, setPhoto] = useState("");
@@ -13,7 +12,7 @@ const UpdateBanner = () => {
 
   const getSingleBanner = async () => {
     try {
-      const { data } = await axios.get(`/api/v1/banner/get-banner/banner`);
+      const { data } = await API.get(`/api/v1/banner/get-banner/banner`);
       if (data?.success) {
         console.log(data);
       } else {
@@ -33,10 +32,10 @@ const UpdateBanner = () => {
       const bannerImage = new FormData();
       photo && bannerImage.append("photo", photo);
       secondphoto && bannerImage.append("secondphoto", secondphoto);
-      thirdphoto && bannerImage.append("thirdphoto", thirdphoto); 
+      thirdphoto && bannerImage.append("thirdphoto", thirdphoto);
 
       await getConfig();
-      const { data } = await axiosInstance.put(
+      const { data } = await API.put(
         `/api/v1/banner/update-banner/banner`,
         bannerImage
       );
@@ -126,7 +125,7 @@ const UpdateBanner = () => {
             </div>
             <div className="mb-3">
               <label className="Butn col-md-12">
-              {thirdphoto ? thirdphoto.name : "Upload Third Banner 🡇"}
+                {thirdphoto ? thirdphoto.name : "Upload Third Banner 🡇"}
                 <input
                   type="file"
                   name="thirdphoto"

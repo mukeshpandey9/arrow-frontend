@@ -7,8 +7,8 @@ import { FiPhoneForwarded } from "react-icons/fi";
 import map from "../images/qr.jpg";
 import { FaMapLocationDot } from "react-icons/fa6";
 import emailjs from "@emailjs/browser";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API } from "../utils/request";
 const Contact = () => {
   const [states, setStates] = useState([]);
   const [selectedState, setSelectedState] = useState("");
@@ -37,7 +37,7 @@ const Contact = () => {
   };
   const getAllStates = async () => {
     try {
-      const { data } = await axios.get("/api/v1/dealerstate/get-state");
+      const { data } = await API.get("/api/v1/dealerstate/get-state");
       if (data?.success) {
         setStates(data?.dealerState);
         console.log(data?.dealerState);

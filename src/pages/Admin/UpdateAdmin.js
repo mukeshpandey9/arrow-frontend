@@ -3,8 +3,8 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "../../components/Layout/Layout";
 import { useAuth } from "../../context/Auth";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import toast from "react-hot-toast";
+import { API } from "../../utils/request";
 const UpdateAdmin = () => {
   const navigate = useNavigate();
   //context
@@ -30,7 +30,7 @@ const UpdateAdmin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put("/api/v1/auth/profile", {
+      const { data } = await API.put("/api/v1/auth/profile", {
         name,
         email,
         password,

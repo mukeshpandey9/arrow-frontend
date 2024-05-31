@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
 import DealerStateForm from "../../components/Form/DealerStateForm";
-import axios from "axios";
 import toast from "react-hot-toast";
 
 import { Modal } from "antd";
+import { API } from "../../utils/request";
 const CreateDealerState = () => {
   const [dealerStates, setDealerStates] = useState([]);
   const [state, setState] = useState("");
@@ -16,7 +16,7 @@ const CreateDealerState = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
+      const { data } = await API.post(
         "/api/v1/dealerstate/create-dealer-state",
         {
           state,
@@ -35,7 +35,7 @@ const CreateDealerState = () => {
 
   const getAllDealerStates = async () => {
     try {
-      const { data } = await axios.get("/api/v1/dealerstate/get-state");
+      const { data } = await API.get("/api/v1/dealerstate/get-state");
       console.log("Fetched dealer states:", data);
       if (data?.success) {
         setDealerStates(data?.dealerState || []);
@@ -54,7 +54,7 @@ const CreateDealerState = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(
+      const { data } = await API.put(
         `/api/v1/dealerstate/update-dealer-state/${selected._id}`,
         { state: updatedState }
       );
@@ -75,7 +75,7 @@ const CreateDealerState = () => {
   // delete
   const handleDelete = async (id) => {
     try {
-      const { data } = await axios.delete(
+      const { data } = await API.delete(
         `/api/v1/dealerstate/delete-dealer-state/${id}`
       );
       if (data?.success) {

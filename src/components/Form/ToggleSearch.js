@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSearch } from "../../context/search";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import "../../styles/Searchbar.css";
+import { API } from "../../utils/request";
 const ToggleSearch = () => {
   const [values, setValues] = useSearch();
   const [showSearch, setShowSearch] = useState(false);
@@ -21,7 +21,7 @@ const ToggleSearch = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get(
+      const { data } = await API.get(
         `/api/v1/product/search/${values.keyword}`
       );
       setValues({ ...values, result: data });

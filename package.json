@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://bharathmegaminds.com",
   "dependencies": {
     "@emailjs/browser": "^4.3.3",
     "@tabler/icons-react": "^3.1.0",
@@ -14,6 +15,7 @@
     "braintree-web-drop-in-react": "^1.2.1",
     "chart.js": "^4.4.2",
     "crypto-browserify": "^3.12.0",
+    "env-cmd": "^10.1.0",
     "razorpay": "^2.9.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
@@ -36,7 +38,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:staging": "env-cmd -f .env.staging npm run build"
   },
   "eslintConfig": {
     "extends": [

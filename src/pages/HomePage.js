@@ -3,7 +3,6 @@ import Layout from "../components/Layout/Layout";
 import "../styles/button.css";
 import "../styles/style.css";
 import "../styles/homepage.css";
-import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import button1 from "../images/tbgallery.png";
 import button2 from "../images/newrelease.png";
@@ -21,6 +20,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
+import { API } from "../utils/request";
 const HomePage = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -42,7 +42,7 @@ const HomePage = () => {
   };
   const getAllProduct = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/get-product");
+      const { data } = await API.get("/api/v1/product/get-product");
       setProducts(data.products);
     } catch (error) {
       console.log(error);
@@ -63,7 +63,7 @@ const HomePage = () => {
   // to fetch all the banners
   const getAllBanners = async () => {
     try {
-      const { data } = await axios.get("/api/v1/banner/get-banner");
+      const { data } = await API.get("/api/v1/banner/get-banner");
       setBanners(data.banner);
     } catch (error) {
       console.log(error);
@@ -77,7 +77,7 @@ const HomePage = () => {
 
   const getAllBookImage = async () => {
     try {
-      const { data } = await axios.get("/api/v1/bookphoto/get-home-book");
+      const { data } = await API.get("/api/v1/bookphoto/get-home-book");
       setGetHomeBook(data.homeBook);
     } catch (error) {
       console.log(error);

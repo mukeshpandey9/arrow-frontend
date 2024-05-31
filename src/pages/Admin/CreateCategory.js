@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { Modal } from "antd";
 import swal from "sweetalert";
 import "../../styles/button.css";
 import CategoryForm from "../../components/Form/CategoryForm";
+import { API } from "../../utils/request";
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
@@ -16,7 +16,7 @@ const CreateCategory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/category/create-category", {
+      const { data } = await API.post("/api/v1/category/create-category", {
         name,
       });
       if (data?.success) {
@@ -34,7 +34,7 @@ const CreateCategory = () => {
   //get all cat
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/categories");
+      const { data } = await API.get("/api/v1/category/categories");
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -51,7 +51,7 @@ const CreateCategory = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(
+      const { data } = await API.put(
         `/api/v1/category/update-category/${selected._id}`,
         { name: updatedName }
       );
@@ -71,7 +71,7 @@ const CreateCategory = () => {
   //DElete Category
   const handleDelete = async (pId) => {
     try {
-      const { data } = await axios.delete(
+      const { data } = await API.delete(
         `/api/v1/category/delete-category/${pId}`
       );
       if (data.success) {

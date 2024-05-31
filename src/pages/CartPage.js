@@ -4,10 +4,10 @@ import { useCart } from "../context/cart";
 import { useAuth } from "../context/Auth";
 import { useNavigate } from "react-router-dom";
 import "../styles/button.css";
-import axios from "axios";
 import swal from "sweetalert";
 import "../styles/cart.css";
 import useRazorpay from "react-razorpay";
+import { API } from "../utils/request";
 const CartPage = () => {
   const [cart, setCart] = useCart();
   const [auth] = useAuth();
@@ -93,7 +93,7 @@ const CartPage = () => {
   const removeCartItem = async (pid) => {
     try {
       console.log(cart);
-      const { data } = await axios.post("/api/v1/product/cart/remove-item", {
+      const { data } = await API.post("/api/v1/product/cart/remove-item", {
         userID: auth?.user.userID,
         productID: pid,
       });
@@ -110,7 +110,7 @@ const CartPage = () => {
   //get payment gateway token
   // const getToken = async () => {
   //   try {
-  //     const { data } = await axios.get("/api/v1/product/braintree/token");
+  //     const { data } = await API.get("/api/v1/product/braintree/token");
   //     setClientToken(data?.clientToken);
   //   } catch (error) {
   //     console.log(error);
@@ -154,8 +154,7 @@ const CartPage = () => {
     };
     console.log(orderData);
 
-    const res = await axios
-      .post("/api/v1/order/create-order", orderData)
+    const res = await API.post("/api/v1/order/create-order", orderData)
       .then((response) => {
         console.log("Order saved successfully:", response.data);
         // Handle success

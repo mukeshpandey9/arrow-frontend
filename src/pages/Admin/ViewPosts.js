@@ -1,9 +1,8 @@
 import Layout from "../../components/Layout/Layout";
 import React, { useState, useEffect } from "react";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import axios from "axios";
 import "../../styles/product.css";
-import { axiosInstance, getConfig } from "../../utils/request";
+import { API, getConfig } from "../../utils/request";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import toast from "react-hot-toast";
@@ -21,7 +20,7 @@ const ViewPosts = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/api/v1/posts/get-all-posts");
+        const response = await API.get("/api/v1/posts/get-all-posts");
 
         if (response.data && Array.isArray(response.data.posts)) {
           setAllPosts(response.data.posts);
@@ -40,9 +39,7 @@ const ViewPosts = () => {
   const handleDelete = async (id) => {
     try {
       await getConfig();
-      const { data } = await axiosInstance.delete(
-        `/api/v1/posts/delete-post/${id}`
-      );
+      const { data } = await API.delete(`/api/v1/posts/delete-post/${id}`);
       if (data.success) {
         navigate("/dashboard/admin/dashboard");
         swal("SuccessFull", "post deleted successfully", "success");
@@ -57,7 +54,7 @@ const ViewPosts = () => {
   //   e.preventDefault();
   //   try {
   //     await getConfig();
-  //     const { data } = await axiosInstance.put(
+  //     const { data } = await API.put(
   //       `/api/v1/posts/update-post/${selectedPost._id}`,
   //       updatePost
   //     );

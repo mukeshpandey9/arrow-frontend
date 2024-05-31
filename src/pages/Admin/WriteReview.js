@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import { getConfig, axiosInstance } from "../../utils/request";
+import { getConfig, API } from "../../utils/request";
 import toast from "react-hot-toast";
 import swal from "sweetalert";
 import { Modal } from "antd";
@@ -21,7 +21,7 @@ const WriteReview = () => {
     const getAllReview = async () => {
       try {
         await getConfig();
-        const res = await axiosInstance.get("/api/v1/review/get-all-review");
+        const res = await API.get("/api/v1/review/get-all-review");
         setGetReviews(res.data);
       } catch (error) {
         console.log("error Fetching all review");
@@ -35,7 +35,7 @@ const WriteReview = () => {
     e.preventDefault();
     try {
       await getConfig();
-      const { data } = await axiosInstance.put(
+      const { data } = await API.put(
         `/api/v1/review/update-review/${selectedReview._id}`,
         { review: updateReview }
       );
@@ -57,7 +57,7 @@ const WriteReview = () => {
     e.preventDefault();
     try {
       await getConfig();
-      const res = await axiosInstance.post("/api/v1/review/write-review", {
+      const res = await API.post("/api/v1/review/write-review", {
         review,
         clientName,
       });
@@ -75,9 +75,7 @@ const WriteReview = () => {
   const handleDelete = async (pId) => {
     try {
       await getConfig();
-      const { data } = await axiosInstance.delete(
-        `/api/v1/review/delete-review/${pId}`
-      );
+      const { data } = await API.delete(`/api/v1/review/delete-review/${pId}`);
       if (data.success) {
         swal("SuccessFull", `${review}Review Deleted Successfully!`, "success");
 

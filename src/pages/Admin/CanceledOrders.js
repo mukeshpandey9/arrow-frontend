@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getConfig, axiosInstance } from "../../utils/request";
+import { getConfig, API } from "../../utils/request";
 
 const CanceledOrders = () => {
   const [canceledOrders, setCanceledOrders] = useState([]);
@@ -8,7 +8,7 @@ const CanceledOrders = () => {
   const FetchAllCanceledOrders = async () => {
     try {
       await getConfig();
-      const res = await axiosInstance.get("/api/v1/order/get-cancel-orders");
+      const res = await API.get("/api/v1/order/get-cancel-orders");
       setCanceledOrders(res.data.orders);
       console.log(res.data.orders);
     } catch (error) {

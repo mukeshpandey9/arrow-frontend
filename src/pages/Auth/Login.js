@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Layout from "./../../components/Layout/Layout";
-import axios from "axios";
 import { useNavigate, NavLink, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import "../../styles/AuthStyle.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useAuth } from "../../context/Auth";
+import { API } from "../../utils/request";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +22,7 @@ const Login = () => {
       return;
     }
     try {
-      const res = await axios.post("/api/v1/auth/login", {
+      const res = await API.post("/api/v1/auth/login", {
         email,
         password,
         captchaValue,

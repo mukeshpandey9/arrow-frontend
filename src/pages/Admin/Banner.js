@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import axios from "axios";
+
 import swal from "sweetalert";
 import toast from "react-hot-toast";
-import { axiosInstance, getConfig } from "../../utils/request";
+import { API, getConfig } from "../../utils/request";
 
 const Banner = () => {
   const [photo, setPhoto] = useState("");
@@ -22,10 +22,7 @@ const Banner = () => {
       formData.append("thirdphoto", thirdphoto);
       //   formData.append("title", title);
       await getConfig();
-      const { data } = await axiosInstance.post(
-        "/api/v1/banner/create-banner",
-        formData
-      );
+      const { data } = await API.post("/api/v1/banner/create-banner", formData);
       if (data?.success) {
         toast.success(data?.message);
       } else {

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import toast from "react-hot-toast";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/AuthStyle.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import { API } from "../../utils/request";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,7 +24,7 @@ const Register = () => {
       return;
     }
     try {
-      const res = await axios.post("/api/v1/auth/register", {
+      const res = await API.post("/api/v1/auth/register", {
         name,
         email,
         password,

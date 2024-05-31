@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, createContext } from "react";
 import axios from "axios";
+import { API } from "../utils/request";
 
 const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
@@ -9,13 +10,12 @@ const AuthProvider = ({ children }) => {
   });
 
   //default axios
-  axios.defaults.headers.common["Authorization"] = `${auth?.token}`;
-  axios.defaults.headers.common["Muntasirul"] = "my name";
 
   useEffect(() => {
     const data = localStorage.getItem("auth");
     if (data) {
       const parseData = JSON.parse(data);
+
       setAuth({
         ...auth,
         user: parseData.user,

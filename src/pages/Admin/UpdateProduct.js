@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import Layout from "./../../components/Layout/Layout";
 import AdminMenu from "./../../components/Layout/AdminMenu";
 import toast from "react-hot-toast";
-import axios from "axios";
 import { Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert";
-import { getConfig, axiosInstance } from "../../utils/request";
+import { getConfig, API } from "../../utils/request";
 const { Option } = Select;
 const UpdateProduct = () => {
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ const UpdateProduct = () => {
   const slug = params.slug;
   const getSingleProduct = async () => {
     try {
-      const { data } = await axios.get(`/api/v1/product/get-product/${slug}`);
+      const { data } = await API.get(`/api/v1/product/get-product/${slug}`);
       setName(data?.product.name);
       setId(data?.product._id);
       setDescription(data?.product.description);
@@ -55,7 +54,7 @@ const UpdateProduct = () => {
   //get all category
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/categories");
+      const { data } = await API.get("/api/v1/category/categories");
       if (data?.success) {
         setCategories(data?.category);
         console.log(data?.category);
@@ -68,7 +67,7 @@ const UpdateProduct = () => {
   //get all subjects
   const getAllSubjects = async () => {
     try {
-      const { data } = await axios.get("/api/v1/subject/subjects");
+      const { data } = await API.get("/api/v1/subject/subjects");
       if (data?.success) {
         setSubjects(data.subject);
       }
@@ -86,7 +85,7 @@ const UpdateProduct = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-       if (!subject) {
+      if (!subject) {
         toast.error("Please select a subject");
         return;
       }
@@ -113,14 +112,13 @@ const UpdateProduct = () => {
       backphoto && productData.append("backphoto", backphoto);
       productData.append("category", category);
       await getConfig();
-      const { data } = axios.put(
+      const { data } = await API.put(
         `/api/v1/product/update-product/${id}`,
         productData
       );
 
       if (data?.success) {
-        toast.error(data?.message);
-      } else {
+        toast.success(data?.message);
         toast.success("Product Updated Successfully");
         navigate("/dashboard/admin/products");
       }
@@ -144,7 +142,7 @@ const UpdateProduct = () => {
       // If the user confirms deletion
       if (willDelete) {
         await getConfig();
-        const { data } = await axiosInstance.delete(
+        const { data } = await API.delete(
           `/api/v1/product/delete-product/${id}`
         );
         navigate("/dashboard/admin/products");
@@ -156,7 +154,7 @@ const UpdateProduct = () => {
       }
     } catch (error) {
       console.log(error);
-      // toast.error("Something went wrong");
+      toast.error("Something went wrong");
     }
   };
   return (

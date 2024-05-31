@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import toast from "react-hot-toast";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/AuthStyle.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import { API } from "../../utils/request";
 
 const CreateAdmin = () => {
   const [name, setName] = useState("");
@@ -25,7 +25,7 @@ const CreateAdmin = () => {
       return;
     }
     try {
-      const res = await axios.post("/api/v1/auth/admin-register", {
+      const res = await API.post("/api/v1/auth/admin-register", {
         name,
         email,
         password,

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import axios from "axios";
-import { axiosInstance, getConfig } from "../../utils/request";
+import { API, getConfig } from "../../utils/request";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -13,7 +12,7 @@ const ViewHomePageBook = () => {
 
   const getAllBookImage = async () => {
     try {
-      const { data } = await axios.get("/api/v1/bookphoto/get-home-book");
+      const { data } = await API.get("/api/v1/bookphoto/get-home-book");
       setGetHomeBook(data.homeBook);
     } catch (error) {
       console.log(error);
@@ -27,7 +26,7 @@ const ViewHomePageBook = () => {
   const handleDelete = async (pid) => {
     try {
       await getConfig();
-      const { data } = await axiosInstance.delete(
+      const { data } = await API.delete(
         `/api/v1/bookphoto/delete-home-book/${pid}`
       );
       if (data?.success) {

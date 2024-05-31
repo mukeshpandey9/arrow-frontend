@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import AdminMenu from "../../components/Layout/AdminMenu";
 import Layout from "../../components/Layout/Layout";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/product.css";
 import swal from "sweetalert";
 import SearchInput from "../../components/Form/SearchInput";
 import AdminSearchInput from "../../components/Form/AdminSearchInput";
-import { getConfig, axiosInstance } from "../../utils/request.js";
+import { getConfig, API } from "../../utils/request.js";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -17,7 +16,7 @@ const Products = () => {
   //get all products
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/get-product");
+      const { data } = await API.get("/api/v1/product/get-product");
       setProducts(data.products);
     } catch (error) {
       console.log(error);
@@ -42,7 +41,7 @@ const Products = () => {
       // If the user confirms deletion
       if (willDelete) {
         // await getConfig();
-        const { data } = await axiosInstance.delete(
+        const { data } = await API.delete(
           `/api/v1/product/delete-product/${pid}`
         );
         getAllProducts();

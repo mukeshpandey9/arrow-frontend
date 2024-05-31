@@ -3,20 +3,20 @@ import Layout from "../components/Layout/Layout";
 import { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "../styles/textbookgallery.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
+import { API } from "../utils/request";
 const Newreleases = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   const getAllProduct = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/get-product");
+      const { data } = await API.get("/api/v1/product/get-product");
       setProducts(data.products);
     } catch (error) {
       console.log(error);

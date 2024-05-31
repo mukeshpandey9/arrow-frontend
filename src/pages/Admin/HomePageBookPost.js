@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import { axiosInstance, getConfig } from "../../utils/request";
+import { API, getConfig } from "../../utils/request";
 import swal from "sweetalert";
 import toast from "react-hot-toast";
 
@@ -15,7 +15,7 @@ const HomePageBookPost = () => {
       const formData = new FormData();
       formData.append("bookphoto", bookphoto);
       await getConfig();
-      const { data } = await axiosInstance.post(
+      const { data } = await API.post(
         "/api/v1/bookphoto/create-home-book",
         formData
       );

@@ -9,7 +9,7 @@ import { IoPerson } from "react-icons/io5";
 import "../../styles/AdminDash.css";
 
 import Chart from "chart.js/auto";
-import axios from "axios";
+import { API } from "../../utils/request";
 
 const AdminDash = () => {
   const [auth] = useAuth();
@@ -22,7 +22,7 @@ const AdminDash = () => {
   // get all orders
   const getPayment = async () => {
     try {
-      const res = await axios.get("/api/v1/order/get-all-order");
+      const res = await API.get("/api/v1/order/get-all-order");
       setPayment(res.data);
 
       calculateTotalAmountReceived(res.data);
@@ -135,7 +135,7 @@ const AdminDash = () => {
 
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/get-product");
+      const { data } = await API.get("/api/v1/product/get-product");
       setProducts(data.products);
       createChart(data.products);
     } catch (error) {

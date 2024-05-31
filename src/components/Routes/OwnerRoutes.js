@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/Auth";
 import { Outlet } from "react-router-dom";
-import axios from "axios";
 import swal from "sweetalert";
 import Spinner from "../Spinner";
+import { API } from "../../utils/request";
 
 export default function PrivateRoute() {
   const [ok, setOk] = useState(false);
@@ -12,7 +12,7 @@ export default function PrivateRoute() {
   useEffect(() => {
     const authCheck = async () => {
       try {
-        const res = await axios.get("/api/v1/auth/owner-auth");
+        const res = await API.get("/api/v1/auth/owner-auth");
         if (res.data.ok) {
           setOk(true);
         } else {

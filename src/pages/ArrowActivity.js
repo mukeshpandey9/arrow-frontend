@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
 import "../styles/Arrowactivity.css";
 import { Carousel } from "react-bootstrap";
-import axios from "axios";
-import { axiosInstance, getConfig } from "../utils/request";
+import { API, getConfig } from "../utils/request";
 const ArrowActivity = () => {
   const [allPosts, setAllPosts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         await getConfig();
-        const response = await axiosInstance.get("/api/v1/posts/get-all-posts");
+        const response = await API.get("/api/v1/posts/get-all-posts");
 
         if (response.data && Array.isArray(response.data.posts)) {
           setAllPosts(response.data.posts);

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import { API } from "../../utils/request";
 
 const { Option } = Select;
 const CreateProduct = () => {
@@ -29,7 +29,7 @@ const CreateProduct = () => {
   //get all cat
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/categories");
+      const { data } = await API.get("/api/v1/category/categories");
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -41,7 +41,7 @@ const CreateProduct = () => {
   //get all subjects
   const getAllSubjects = async () => {
     try {
-      const { data } = await axios.get("/api/v1/subject/subjects");
+      const { data } = await API.get("/api/v1/subject/subjects");
       if (data?.success) {
         setSubjects(data?.subject);
         console.log(data?.subject);
@@ -74,10 +74,7 @@ const CreateProduct = () => {
       productData.append("backphoto", backphoto);
       productData.append("category", category);
 
-      const { data } = axios.post(
-        "/api/v1/product/create-product",
-        productData
-      );
+      const { data } = API.post("/api/v1/product/create-product", productData);
       if (data?.success) {
         toast.error(data?.message);
       } else {
