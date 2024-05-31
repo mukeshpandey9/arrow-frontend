@@ -21,6 +21,7 @@ export const getConfig = async () => {
     // const baseEndpoint = response.data.baseendpoint;
     // // Optionally, you can set axios.defaults.baseURL if you want it to apply to all axios instances.
     // axiosInstance.defaults.baseURL = baseEndpoint;
+    return;
   } catch (error) {
     console.error("Error fetching app config:", error);
     throw error;
